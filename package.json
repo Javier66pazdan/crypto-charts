@@ -1,6 +1,8 @@
 {
   "name": "crypto-charts",
   "version": "0.0.0",
+  "author": "Gabriel Pazdan",
+  "repository": "https://github.com/Javier66pazdan/crypto-charts",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
