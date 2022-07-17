@@ -13,7 +13,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   ],
   exports: [
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
   ],
   imports: [
     CommonModule,
