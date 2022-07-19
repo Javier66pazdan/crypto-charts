@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
-interface Crypto {
+export interface Crypto {
   id: string;
   rank: string;
   symbol: string;
@@ -16,9 +16,13 @@ interface Crypto {
   vwap24Hr: string;
 }
 
-interface HistoricalCrypto {
+export interface HistoricalCrypto {
   priceUsd: string;
   time: number;
+}
+
+interface AllCryptoResponse {
+  data: Crypto[];
 }
 
 @Injectable({
@@ -28,15 +32,15 @@ export class CryptoService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getCryptosData(): Observable<Crypto[]> {
-    return this.httpClient.get<Crypto[]>('api.coincap.io/v2/assets');
+  getCryptosData(): Observable<AllCryptoResponse> {
+    return this.httpClient.get<AllCryptoResponse>('https://api.coincap.io/v2/assets');
   }
 
   getSingleCryptoData(id: string): Observable<Crypto> {
-    return this.httpClient.get<Crypto>('api.coincap.io/v2/assets/' + id);
+    return this.httpClient.get<Crypto>('https://api.coincap.io/v2/assets/' + id);
   }
 
   getHistoricalSingleCryptoData(id: string): Observable<HistoricalCrypto[]> {
-    return this.httpClient.get<HistoricalCrypto[]>('api.coincap.io/v2/assets/' + id + '/history');
+    return this.httpClient.get<HistoricalCrypto[]>('https://api.coincap.io/v2/assets/' + id + '/history');
   }
 }

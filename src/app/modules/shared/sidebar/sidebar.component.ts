@@ -8,19 +8,21 @@ import {Subscription} from "rxjs";
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit, OnDestroy {
-  @ViewChild('sidenav') sidenav!: MatSidenav;
+export class SidebarComponent implements OnInit ,OnDestroy {
   opened!: boolean;
   subscription!: Subscription;
+  isSidebarOpen = false;
 
   constructor(private sidebarService: SidebarService) { }
 
   ngOnInit(): void {
     this.subscription = this.sidebarService.sidebar.subscribe({
-      next: () => {
-        this.sidenav.toggle();
+      next: (value) => {
+        this.isSidebarOpen = value;
       }
     });
+  }
+  ngAfterViewInit() {
   }
 
   ngOnDestroy(): void {
