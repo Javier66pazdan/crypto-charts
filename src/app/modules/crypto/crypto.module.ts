@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CryptoRoutingModule } from './crypto-routing.module';
-import { CryptoComponent } from './crypto.component';
-import { SingleCryptoComponent } from './single-crypto/single-crypto.component';
 import {SharedModule} from "../shared/shared.module";
+import { CryptoComponent } from './crypto.component';
+import { CryptoDetailsComponent } from './crypto-details/crypto-details.component';
 import {MaterialModule} from "../../../material.module";
 import {MatPaginatorModule} from "@angular/material/paginator";
 
@@ -12,7 +12,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 @NgModule({
   declarations: [
     CryptoComponent,
-    SingleCryptoComponent
+    CryptoDetailsComponent
   ],
   imports: [
     CommonModule,

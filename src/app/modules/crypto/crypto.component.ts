@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Crypto, CryptoService} from "../../core/services/crypto.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort, Sort} from "@angular/material/sort";
 import {LiveAnnouncer} from "@angular/cdk/a11y";
-import {interval, timer} from "rxjs";
+import {interval, Subscription, timer} from "rxjs";
 import {switchMap} from "rxjs/operators";
 import {MatPaginator} from "@angular/material/paginator";
 
@@ -12,11 +12,12 @@ import {MatPaginator} from "@angular/material/paginator";
   templateUrl: './crypto.component.html',
   styleUrls: ['./crypto.component.scss']
 })
-export class CryptoComponent implements OnInit, AfterViewInit {
+export class CryptoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   displayedColumns: string[] = ['rank', 'name', 'priceUsd', 'changePercent24Hr', '24hVolume' ,'links'];
   cryptosData: Crypto[] = [];
   tableData = new MatTableDataSource<Crypto>([]);
+  subscription!: Subscription;
 
   constructor(private cryptoService: CryptoService, private _liveAnnouncer: LiveAnnouncer) { }
 
@@ -25,7 +26,7 @@ export class CryptoComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // auto update data every 30 secs
-    timer(0, 30000).
+    this.subscription = timer(0, 30000).
     pipe(switchMap(() => this.cryptoService.getCryptosData())).
     subscribe({
       next: (cryptosData) => {
@@ -34,7 +35,7 @@ export class CryptoComponent implements OnInit, AfterViewInit {
         this.tableData.sort = this.sort;
         this.tableData.paginator = this.paginator;
       }
-    })
+    });
   }
 
   ngAfterViewInit() {
@@ -47,5 +48,9 @@ export class CryptoComponent implements OnInit, AfterViewInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

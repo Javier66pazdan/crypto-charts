@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 export interface Crypto {
   id: string;
@@ -16,13 +17,21 @@ export interface Crypto {
   vwap24Hr: string;
 }
 
-export interface HistoricalCrypto {
+export interface HistoricalCryptoData {
   priceUsd: string;
-  time: number;
+  time: Date;
+}
+
+export interface HistoricalCrypto {
+  data: HistoricalCryptoData[];
 }
 
 interface AllCryptoResponse {
   data: Crypto[];
+}
+
+interface SingleCryptoResponse {
+  data: Crypto;
 }
 
 @Injectable({
@@ -36,11 +45,24 @@ export class CryptoService {
     return this.httpClient.get<AllCryptoResponse>('https://api.coincap.io/v2/assets');
   }
 
-  getSingleCryptoData(id: string): Observable<Crypto> {
-    return this.httpClient.get<Crypto>('https://api.coincap.io/v2/assets/' + id);
+  getSingleCryptoData(id: string): Observable<SingleCryptoResponse> {
+    return this.httpClient.get<SingleCryptoResponse>('https://api.coincap.io/v2/assets/' + id);
   }
 
-  getHistoricalSingleCryptoData(id: string): Observable<HistoricalCrypto[]> {
-    return this.httpClient.get<HistoricalCrypto[]>('https://api.coincap.io/v2/assets/' + id + '/history');
+  getHistoricalSingleCryptoData(id: string, interval: string): Observable<HistoricalCryptoData[]> {
+    return this.httpClient.get<HistoricalCrypto>('https://api.coincap.io/v2/assets/' + id + '/history', {
+      params: {
+        interval
+      }
+    }).pipe(
+      map(data => {
+        return data.data.map(historicalData => {
+          return {
+            priceUsd: historicalData.priceUsd,
+            time: new Date(historicalData.time)
+          };
+        })
+      })
+    );
   }
 }

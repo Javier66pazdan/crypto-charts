@@ -1,4 +1,4 @@
-import { CryptoProcentagePipe } from './crypto-procentage.pipe';
+import { CryptoProcentagePipe } from './crypto-percent.pipe';
 
 describe('CryptoProcentagePipe', () => {
   it('create an instance', () => {
