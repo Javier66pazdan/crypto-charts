@@ -20,6 +20,9 @@ export interface Crypto {
 export interface HistoricalCryptoData {
   priceUsd: string;
   time: Date;
+  year: number;
+  month: number;
+  day: number;
 }
 
 export interface HistoricalCrypto {
@@ -56,10 +59,14 @@ export class CryptoService {
       }
     }).pipe(
       map(data => {
-        return data.data.map(historicalData => {
+        return data.data.map((historicalData) => {
+          const date = new Date(historicalData.time);
           return {
             priceUsd: historicalData.priceUsd,
-            time: new Date(historicalData.time)
+            time: date,
+            year: date.getFullYear(),
+            month: date.getMonth() + 1,
+            day: date.getDate()
           };
         })
       })
