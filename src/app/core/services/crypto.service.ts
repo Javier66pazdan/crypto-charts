@@ -62,10 +62,10 @@ export class CryptoService {
         return data.data.map((historicalData) => {
           const date = new Date(historicalData.time);
           return {
-            priceUsd: historicalData.priceUsd,
+            priceUsd: Number(historicalData.priceUsd).toFixed(2),
             time: date,
             year: date.getFullYear(),
-            month: date.getMonth() + 1,
+            month: date.getMonth(),
             day: date.getDate()
           };
         })

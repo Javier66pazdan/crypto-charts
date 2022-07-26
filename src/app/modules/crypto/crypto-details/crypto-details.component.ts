@@ -13,6 +13,7 @@ export class CryptoDetailsComponent implements OnInit {
 
   cryptoId!: string;
   historicalData: HistoricalCryptoData[] = [];
+  cryptoName!: string;
   subscription!: Subscription;
 
   Highcharts: typeof Highcharts = Highcharts;
@@ -32,7 +33,7 @@ export class CryptoDetailsComponent implements OnInit {
 
     this.cryptoService.getSingleCryptoData(this.cryptoId).subscribe({
       next: (crypto) => {
-        // console.log(crypto)
+        this.cryptoName = crypto.data.name;
       },
       error: (err) => {
         console.log(err);
@@ -44,16 +45,33 @@ export class CryptoDetailsComponent implements OnInit {
         this.historicalData = historicalData;
         this.chartOptions = {
           title: {
-            text: 'Historical Data'
+            text: `${this.cryptoName} Prices`
+          },
+          yAxis: {
+            title: {
+              text: 'Price (USD)'
+            }
+          },
+          xAxis: {
+            title: {
+              text: 'Date'
+            },
+            type: 'datetime',
+            dateTimeLabelFormats: {
+              day: '%b %y'
+            }
           },
           series: [{
             data: this.historicalData.map(data => {
-              return [Date.UTC(data.year, data.month, data.day), Number(data.priceUsd)];
+              return {
+                x: Date.UTC(data.year, data.month, data.day),
+                y: Number(data.priceUsd)
+              }
+              // [Date.UTC(data.year, data.month, data.day), Number(data.priceUsd)];
             }),
             type: 'line'
           }]
         };
-        console.log(this.historicalData)
       },
       error: (err) => {
         console.log(err);

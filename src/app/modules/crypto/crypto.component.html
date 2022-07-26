@@ -44,7 +44,7 @@
     <!--  empty-->
     <ng-container matColumnDef="links">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element"> <a [routerLink]="['/crypto-list/' + element.id]" class="crypto-details-link">Szczegóły</a> </td>
+      <td mat-cell *matCellDef="let element"> <a [routerLink]="['/crypto-list/' + element.id]" class="crypto-details-link">Details</a> </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
