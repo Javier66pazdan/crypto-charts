@@ -1,6 +1,7 @@
 <highcharts-chart
   [Highcharts]="Highcharts"
   [options]="chartOptions"
+  [constructorType]="'stockChart'"
   *ngIf="chartOptions && cryptoName"
   class="highchart"
 >

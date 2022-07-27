@@ -3,6 +3,10 @@ import {Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {CryptoService, HistoricalCryptoData} from "../../../core/services/crypto.service";
 import * as Highcharts from 'highcharts';
+import HC_exporting from 'highcharts/modules/exporting';
+import HC_stock from 'highcharts/modules/stock';
+HC_exporting(Highcharts);
+HC_stock(Highcharts);
 
 @Component({
   selector: 'app-crypto-details',
@@ -70,7 +74,10 @@ export class CryptoDetailsComponent implements OnInit {
               // [Date.UTC(data.year, data.month, data.day), Number(data.priceUsd)];
             }),
             type: 'line'
-          }]
+          }],
+          exporting: {
+            enabled: true
+          }
         };
       },
       error: (err) => {
