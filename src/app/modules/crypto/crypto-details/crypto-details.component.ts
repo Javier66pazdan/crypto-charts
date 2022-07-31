@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CryptoService, HistoricalCryptoData} from "../../../core/services/crypto.service";
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
@@ -23,7 +23,9 @@ export class CryptoDetailsComponent implements OnInit {
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions!: Highcharts.Options;
 
-  constructor(private cryptoService: CryptoService, private route: ActivatedRoute) { }
+  constructor(private cryptoService: CryptoService, private route: ActivatedRoute, private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   ngOnInit(): void {
     this.subscription = this.route.paramMap.subscribe({

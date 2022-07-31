@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   options!: string[];
   autocompleteData: AutocompleteData[] = [];
   filteredOptions!: Observable<string[]>;
+  isModalOpen = false;
 
   constructor(private sidebarService: SidebarService, private autocompleteService: AutocompleteService, private router: Router) { }
 
@@ -53,7 +54,12 @@ export class HeaderComponent implements OnInit {
     const crypto = this.autocompleteData.find(crypto => crypto.name === this.myControl.value);
     if(crypto) {
       this.router.navigate(['/crypto-list', crypto.id]);
+    } else {
+      this.isModalOpen = true;
     }
-    console.log('modal')
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
   }
 }

@@ -11,12 +11,17 @@
   color: #fff;
 }
 
-.autocomplete-form {
-
-}
-
 .autocomplete-input {
   padding: 0.75em;
   border-radius: 2px;
   border: none;
+}
+
+.modal-paragraph {
+  padding: 1em 0;
+  font-size: 2em;
+
+  span {
+    font-weight: 600;
+  }
 }

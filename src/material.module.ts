@@ -9,6 +9,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   exports: [
@@ -21,7 +22,8 @@ import {MatInputModule} from "@angular/material/input";
     MatSortModule,
     MatAutocompleteModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatPaginatorModule,
   ]
 })
 export class MaterialModule {}

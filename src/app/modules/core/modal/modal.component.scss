@@ -1,0 +1,40 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 11;
+}
+
+.modal-wrapper {
+  z-index: 12;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 30vw;
+  max-width: 90vw;
+  min-height: 10vh;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  padding: 30px;
+  border-radius: 5px;
+
+  .close-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 2rem;
+    cursor: pointer;
+
+  }
+}
+
+@media (max-width: 1025px) {
+  .modal-wrapper {
+    min-width: 88%;
+  }
+
+}

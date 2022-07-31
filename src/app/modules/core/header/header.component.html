@@ -6,10 +6,11 @@
   <span class="spacer"></span>
   <form class="autocomplete-form">
       <input type="text"
-             placeholder="Pick one"
+             placeholder="Crypto name"
              class="autocomplete-input"
              [formControl]="myControl"
-             [matAutocomplete]="auto">
+             [matAutocomplete]="auto"
+             #input>
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           {{option}}
@@ -25,3 +26,6 @@
     </button>
   </a>
 </mat-toolbar>
+<app-modal (close)="closeModal()" *ngIf="isModalOpen">
+  <p class="modal-paragraph">There is no crypto with name: <span>{{ input.value }}</span></p>
+</app-modal>
