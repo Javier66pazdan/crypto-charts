@@ -4,9 +4,6 @@ import {HeaderComponent} from "./header/header.component";
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {RouterModule} from "@angular/router";
 import {MaterialModule} from "../../../material.module";
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
@@ -19,9 +16,6 @@ import {ReactiveFormsModule} from "@angular/forms";
     RouterModule,
     ReactiveFormsModule,
     MaterialModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatInputModule
   ],
   exports: [
     HeaderComponent,
