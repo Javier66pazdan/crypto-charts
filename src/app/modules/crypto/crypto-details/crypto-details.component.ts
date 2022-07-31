@@ -16,8 +16,8 @@ HC_stock(Highcharts);
 export class CryptoDetailsComponent implements OnInit {
 
   cryptoId!: string;
-  historicalData: HistoricalCryptoData[] = [];
   cryptoName!: string;
+  historicalData: HistoricalCryptoData[] = [];
   subscription!: Subscription;
 
   Highcharts: typeof Highcharts = Highcharts;

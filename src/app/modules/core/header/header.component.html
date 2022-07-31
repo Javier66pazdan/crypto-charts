@@ -4,12 +4,24 @@
   </button>
   <span>Crypto charts</span>
   <span class="spacer"></span>
+  <form class="autocomplete-form">
+      <input type="text"
+             placeholder="Pick one"
+             class="autocomplete-input"
+             [formControl]="myControl"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+  </form>
+  <button mat-icon-button class="search-btn" aria-label="Button with search icon">
+    <mat-icon>search</mat-icon>
+  </button>
   <a routerLink="/crypto-list">
     <button mat-icon-button class="home-btn" aria-label="Button with home icon">
-        <mat-icon>home</mat-icon>
+      <mat-icon>home</mat-icon>
     </button>
   </a>
-  <button mat-icon-button class="share-btn" aria-label="Button with share icon">
-    <mat-icon>share</mat-icon>
-  </button>
 </mat-toolbar>
