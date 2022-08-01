@@ -6,13 +6,13 @@ import {BehaviorSubject} from "rxjs";
 })
 export class SidebarService {
 
-  private sidebarState = new BehaviorSubject('');
+  private sidebarState = new BehaviorSubject(true);
   sidebar = this.sidebarState.asObservable();
 
   constructor() { }
 
   toggleSidebar() {
-    this.sidebarState.next('');
+    this.sidebarState.next(!this.sidebarState.getValue());
   }
 
 }

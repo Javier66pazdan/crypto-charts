@@ -1,0 +1,31 @@
+<mat-toolbar class="toolbar" color="primary">
+  <button mat-icon-button class="hamburger-btn" aria-label="Button with hamburger icon" (click)="toggleSidebar()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Crypto charts</span>
+  <span class="spacer"></span>
+  <form class="autocomplete-form">
+      <input type="text"
+             placeholder="Crypto name"
+             class="autocomplete-input"
+             [formControl]="myControl"
+             [matAutocomplete]="auto"
+             #input>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+  </form>
+  <button mat-icon-button class="search-btn" aria-label="Button with search icon" (click)="navigateToCrypto()">
+    <mat-icon>search</mat-icon>
+  </button>
+  <a routerLink="/crypto-list">
+    <button mat-icon-button class="home-btn" aria-label="Button with home icon">
+      <mat-icon>home</mat-icon>
+    </button>
+  </a>
+</mat-toolbar>
+<app-modal (close)="closeModal()" *ngIf="isModalOpen">
+  <p class="modal-paragraph">There is no crypto with name: <span>{{ input.value }}</span></p>
+</app-modal>

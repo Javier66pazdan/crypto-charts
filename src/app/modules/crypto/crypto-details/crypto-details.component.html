@@ -1,0 +1,14 @@
+<highcharts-chart
+  [Highcharts]="Highcharts"
+  [options]="chartOptions"
+  [constructorType]="'stockChart'"
+  *ngIf="cryptoName && chartOptions"
+  class="highchart"
+>
+</highcharts-chart>
+<div *ngIf="singleCryptoErrMessage" class="alert-danger">
+  <p>{{singleCryptoErrMessage}}</p>
+</div>
+<div *ngIf="historicalDataErrMessage" class="alert-danger">
+  <p>{{historicalDataErrMessage}}</p>
+</div>

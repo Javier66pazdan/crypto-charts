@@ -1,23 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {CryptoPercentPipe} from "./pipes/crypto-percent.pipe";
+import { CryptoPricePipe } from './pipes/crypto-price.pipe';
+import { VolumePipe } from './pipes/volume.pipe';
 import {MaterialModule} from "../../../material.module";
-import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-
-
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    SidebarComponent
+    CryptoPercentPipe,
+    CryptoPricePipe,
+    VolumePipe
   ],
   exports: [
-    HeaderComponent,
-    SidebarComponent
+    CommonModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    CryptoPercentPipe,
+    CryptoPricePipe,
+    VolumePipe
   ],
   imports: [
     CommonModule,
     MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }
