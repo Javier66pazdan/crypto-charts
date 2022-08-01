@@ -30,9 +30,6 @@ export class HeaderComponent implements OnInit {
           startWith(''),
           map(value => this._filter(value|| ''))
         );
-      },
-      error: (err) => {
-
       }
     });
   }

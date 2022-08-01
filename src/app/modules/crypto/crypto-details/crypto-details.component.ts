@@ -19,6 +19,8 @@ export class CryptoDetailsComponent implements OnInit {
   cryptoName!: string;
   historicalData: HistoricalCryptoData[] = [];
   subscription!: Subscription;
+  singleCryptoErrMessage: string | boolean = false;
+  historicalDataErrMessage: string | boolean = false;
 
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions!: Highcharts.Options;
@@ -31,23 +33,22 @@ export class CryptoDetailsComponent implements OnInit {
     this.subscription = this.route.paramMap.subscribe({
       next: (params) => {
         this.cryptoId = (params.get('id') as string);
-      },
-      error: (err) => {
-        console.log(err);
       }
     });
 
     this.cryptoService.getSingleCryptoData(this.cryptoId).subscribe({
       next: (crypto) => {
+        this.singleCryptoErrMessage = false;
         this.cryptoName = crypto.data.name;
       },
       error: (err) => {
-        console.log(err);
+        this.singleCryptoErrMessage = err;
       }
     });
 
     this.cryptoService.getHistoricalSingleCryptoData(this.cryptoId, 'd1').subscribe({
       next: (historicalData) => {
+        this.historicalDataErrMessage = false;
         this.historicalData = historicalData;
         this.chartOptions = {
           title: {
@@ -83,7 +84,7 @@ export class CryptoDetailsComponent implements OnInit {
         };
       },
       error: (err) => {
-        console.log(err);
+        this.historicalDataErrMessage = err;
       }
     });
   }

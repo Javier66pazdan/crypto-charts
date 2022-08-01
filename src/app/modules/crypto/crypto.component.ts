@@ -18,6 +18,7 @@ export class CryptoComponent implements OnInit, AfterViewInit, OnDestroy {
   cryptosData: Crypto[] = [];
   tableData = new MatTableDataSource<Crypto>([]);
   subscription!: Subscription;
+  errMessage: string | boolean = false;
 
   constructor(private cryptoService: CryptoService, private _liveAnnouncer: LiveAnnouncer) { }
 
@@ -30,10 +31,14 @@ export class CryptoComponent implements OnInit, AfterViewInit, OnDestroy {
     pipe(switchMap(() => this.cryptoService.getCryptosData())).
     subscribe({
       next: (cryptosData) => {
+        this.errMessage = false;
         this.tableData = new MatTableDataSource(cryptosData.data);
         this.cryptosData = cryptosData.data;
         this.tableData.sort = this.sort;
         this.tableData.paginator = this.paginator;
+      },
+      error: (err) => {
+        this.errMessage = err;
       }
     });
   }
